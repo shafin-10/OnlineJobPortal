@@ -3,6 +3,7 @@ package com.example.OnlineJobPortal.Controller;
 import com.example.OnlineJobPortal.dto.LoginResponseDto;
 import com.example.OnlineJobPortal.model.Users;
 import com.example.OnlineJobPortal.record.LoginResponseRecord;
+import com.example.OnlineJobPortal.record.RegisterRecord;
 import com.example.OnlineJobPortal.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,9 @@ public class AuthController {
     private AuthService service;
 
     @PostMapping("/register")
-    public Users register(@RequestBody Users user){
-        service.register(user);
-        return user;
+    public ResponseEntity register(@RequestBody RegisterRecord data){
+        Object response = service.register(data);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")

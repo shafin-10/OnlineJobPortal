@@ -2,7 +2,7 @@ package com.example.OnlineJobPortal.Security;
 
 import com.example.OnlineJobPortal.model.Roles;
 import com.example.OnlineJobPortal.model.Users;
-import com.example.OnlineJobPortal.repo.RoleRepo;
+import com.example.OnlineJobPortal.repo.RolesRepo;
 import com.example.OnlineJobPortal.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +21,7 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService {
 
     private UserRepo userRepo;
-    private RoleRepo roleRepo;
+    private RolesRepo roleRepo;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

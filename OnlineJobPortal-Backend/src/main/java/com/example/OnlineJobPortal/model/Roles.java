@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 @Entity
 public class Roles {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -14,8 +15,6 @@ public class Roles {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users;
-
-    private Integer domainStatusId;
 
     public Users getUsers() {
         return users;
