@@ -1,23 +1,26 @@
 package com.example.OnlineJobPortal.Security;
 
+import com.example.OnlineJobPortal.model.Roles;
+import com.example.OnlineJobPortal.model.Users;
+import com.example.OnlineJobPortal.repo.UserRepo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
 public class JWTservice {
+    @Autowired
+    UserRepo userRepo;
 
     private  String secretkey = "";
 

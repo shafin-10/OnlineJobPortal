@@ -5,6 +5,7 @@ import com.example.OnlineJobPortal.model.Users;
 import com.example.OnlineJobPortal.repo.RolesRepo;
 import com.example.OnlineJobPortal.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
-
+    @Autowired
     private UserRepo userRepo;
+    @Autowired
     private RolesRepo roleRepo;
 
     @Override
@@ -32,12 +33,12 @@ public class MyUserDetailsService implements UserDetailsService {
         }
 //        return new UserPrincipal(user);
 
-        List<Roles> roles = user.getRoles();
+        List<Roles> roles = user.getRolesList();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         for (Roles it : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + it.getName()));
+            authorities.add(new SimpleGrantedAuthority(it.getName()));
         }
 
         return new User(user.getEmail(), user.getPassword(), authorities);

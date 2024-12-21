@@ -12,11 +12,6 @@ public class home {
         return "hello";
     }
 
-    @PostMapping("/addJob")
-    public String addNewJob(){
-        return "addNewJob";
-    }
-
     @PostMapping("/applyJob")
     public String applyJob(){
         return "applyJob";

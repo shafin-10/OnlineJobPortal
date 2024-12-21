@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -69,5 +71,23 @@ public class AuthService {
             return jwTservice.generateToken(user.getEmail());
         else
             return "failure";
+    }
+
+    public Users getCurrentLoggedInUser() {
+        // Retrieve the Authentication object
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // You can retrieve the principal from the authentication object
+            Object principal = authentication.getPrincipal();
+
+            // If your user details implement UserDetails interface
+            if (principal instanceof UserDetails) {
+                String email = ((UserDetails) principal).getUsername();
+                return userRepo.findByEmail(email);
+            }
+        }
+
+        return null;
     }
 }

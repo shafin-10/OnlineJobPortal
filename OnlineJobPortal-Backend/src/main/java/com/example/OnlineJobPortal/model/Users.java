@@ -1,10 +1,9 @@
 package com.example.OnlineJobPortal.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -17,20 +16,26 @@ public class Users {
     private String email;
     private String password;
 
-//    @JsonIgnore
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-    private List<Roles> roles;
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private List<Roles> rolesList;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private List<Jobs> jobsList;
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private List<JobApplication> jobApplicationList;
 
     public int getId() {
         return id;
     }
 
-    public List<Roles> getRoles() {
-        return roles;
+    public List<Roles> getRolesList() {
+        return rolesList;
     }
 
-    public void setRoles(List<Roles> roles) {
-        this.roles = roles;
+    public void setRolesList(List<Roles> rolesList) {
+        this.rolesList = rolesList;
     }
 
     public void setId(int id) {
@@ -59,6 +64,22 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Jobs> getJobsList() {
+        return jobsList;
+    }
+
+    public void setJobsList(List<Jobs> jobsList) {
+        this.jobsList = jobsList;
+    }
+
+    public List<JobApplication> getJobApplicationList() {
+        return jobApplicationList;
+    }
+
+    public void setJobApplicationList(List<JobApplication> jobApplicationList) {
+        this.jobApplicationList = jobApplicationList;
     }
 
     @Override

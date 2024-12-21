@@ -39,9 +39,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         //this two link will not require authentication
                         .requestMatchers("login","register").permitAll()
-                        .requestMatchers("/applyJob").hasRole("SHAFIN")
-//                        .requestMatchers("/addJob").hasRole("ADMIN")
-                        .requestMatchers("/addJob").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/addJob").hasRole("EMPLOYEER")
+//                        .requestMatchers("/addJob").hasAnyRole("USER", "ADMIN", "EMPLOYEER")
                         .anyRequest().authenticated())
                 //to enable login with rest client
                 .httpBasic(Customizer.withDefaults())
