@@ -4,6 +4,7 @@ import com.example.OnlineJobPortal.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -39,8 +40,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         //this two link will not require authentication
                         .requestMatchers("login","register").permitAll()
-                        .requestMatchers("/addJob").hasRole("EMPLOYEER")
 //                        .requestMatchers("/addJob").hasAnyRole("USER", "ADMIN", "EMPLOYEER")
+
+                        //jobs api
+                        .requestMatchers(HttpMethod.POST, "/api/job").hasRole("EMPLOYEER")
+                        .requestMatchers(HttpMethod.GET, "/api/jobs").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/jobs/{id}").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/jobs/{id}").hasRole("EMPLOYEER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/jobs/{id}}").hasRole("EMPLOYEER")
+                        
+
+
+
                         .anyRequest().authenticated())
                 //to enable login with rest client
                 .httpBasic(Customizer.withDefaults())

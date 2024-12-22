@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JobsService {
@@ -24,4 +25,19 @@ public class JobsService {
         return jobsRepo.save(jobs);
     }
 
+    public Jobs getJobById(int id) {
+        return jobsRepo.findById((long) id).orElse(null);
+    }
+
+    public List<Jobs> getAllJobs() {
+        return jobsRepo.findAll();
+    }
+
+    public void deleteJob(int id) {
+       jobsRepo.deleteById((long) id);
+    }
+
+    public Jobs updateJob(int id, Jobs job) {
+        return jobsRepo.save(job);
+    }
 }
