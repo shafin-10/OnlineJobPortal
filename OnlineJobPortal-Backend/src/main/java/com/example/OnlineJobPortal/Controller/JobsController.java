@@ -50,7 +50,7 @@ public class JobsController {
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
         }
         else
-            return new ResponseEntity<>("Product Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("job Not found", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/jobs/{id}")
