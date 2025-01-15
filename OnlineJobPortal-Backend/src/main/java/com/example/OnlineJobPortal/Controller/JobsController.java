@@ -42,15 +42,14 @@ public class JobsController {
     }
 
     @DeleteMapping("/jobs/{id}")
-    public ResponseEntity<String> deleteJobs(@PathVariable int id)
-    {
+    public ResponseEntity<String> deleteJobs(@PathVariable int id) {
         Jobs jobs = jobsService.getJobById(id);
-        if(jobs != null){
+        if (jobs != null) {
             jobsService.deleteJob(id);
-            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+            return new ResponseEntity<>("Job successfully deleted.", HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>("Job not found.", HttpStatus.NOT_FOUND);
         }
-        else
-            return new ResponseEntity<>("job Not found", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/jobs/{id}")
@@ -61,6 +60,8 @@ public class JobsController {
         else
             return new ResponseEntity<>("failed to update", HttpStatus.NOT_FOUND);
     }
+
+    // add search job api
 
 
 }

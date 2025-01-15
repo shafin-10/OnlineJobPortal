@@ -26,7 +26,7 @@ public class JobsService {
     }
 
     public Jobs getJobById(int id) {
-        return jobsRepo.findById((long) id).orElse(null);
+        return jobsRepo.findById(id).orElse(null);
     }
 
     public List<Jobs> getAllJobs() {
@@ -34,7 +34,7 @@ public class JobsService {
     }
 
     public void deleteJob(int id) {
-       jobsRepo.deleteById((long) id);
+       jobsRepo.deleteById(id);
     }
 
     public Jobs updateJob(int id, Jobs job) {

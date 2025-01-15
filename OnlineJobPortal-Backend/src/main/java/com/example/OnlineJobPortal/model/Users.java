@@ -16,12 +16,17 @@ public class Users {
     private String email;
     private String password;
 
+
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @JsonManagedReference
+   // private Roles roles;
     private List<Roles> rolesList;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Jobs> jobsList;
+
 
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<JobApplication> jobApplicationList;

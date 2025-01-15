@@ -1,6 +1,7 @@
 package com.example.OnlineJobPortal.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Table(name = "roles")
@@ -14,7 +15,9 @@ public class Roles {
 
     @ManyToOne
     @JoinColumn(name = "users_id")
+    @JsonBackReference
     private Users users;
+
 
     public Users getUsers() {
         return users;

@@ -39,7 +39,7 @@ public class SecurityConfig {
                 //for login restriction
                 .authorizeHttpRequests(request -> request
                         //this two link will not require authentication
-                        .requestMatchers("login","register").permitAll()
+                        .requestMatchers("/api/login","/api/register").permitAll()
 //                        .requestMatchers("/addJob").hasAnyRole("USER", "ADMIN", "EMPLOYEER")
 
                         //jobs api
@@ -47,10 +47,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/jobs").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/jobs/{id}").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/jobs/{id}").hasRole("EMPLOYEER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/jobs/{id}}").hasRole("EMPLOYEER")
-                        
+                        .requestMatchers(HttpMethod.DELETE, "/api/jobs/{id}").hasRole("EMPLOYEER")
 
-
+                        .requestMatchers(HttpMethod.GET, "/api/employers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/jobseekers").permitAll()
 
                         .anyRequest().authenticated())
                 //to enable login with rest client

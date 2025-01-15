@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class home {
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public String greet(){
         return "hello";
     }
@@ -15,5 +15,5 @@ public class home {
     @PostMapping("/applyJob")
     public String applyJob(){
         return "applyJob";
-    }
+    }*/
 }
