@@ -24,4 +24,5 @@ public class JobSeekerController {
     }
 
     //applied job api
+
 }

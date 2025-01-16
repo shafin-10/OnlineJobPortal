@@ -51,6 +51,8 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/api/employers").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/jobseekers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/postedJobs/{id}").permitAll()
+
 
                         .anyRequest().authenticated())
                 //to enable login with rest client

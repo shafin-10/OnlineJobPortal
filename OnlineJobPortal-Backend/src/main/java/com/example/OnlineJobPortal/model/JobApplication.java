@@ -1,5 +1,6 @@
 package com.example.OnlineJobPortal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,10 +17,12 @@ public class JobApplication {
 
     @ManyToOne
     @JoinColumn(name = "users_id")
+    @JsonIgnore
     private Users users; //JOB SEEKER ID
 
     @ManyToOne
     @JoinColumn(name = "jobs_id")
+    @JsonIgnore
     private Jobs jobs;
 
 

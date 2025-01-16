@@ -1,5 +1,6 @@
 package com.example.OnlineJobPortal.service;
 
+import com.example.OnlineJobPortal.model.Jobs;
 import com.example.OnlineJobPortal.model.Roles;
 import com.example.OnlineJobPortal.model.Users;
 import com.example.OnlineJobPortal.repo.UserRepo;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployerService {
@@ -28,5 +30,10 @@ public class EmployerService {
             }
         }
         return employers;
+    }
+
+    //get posted jobs
+    public List<Jobs> getPostedJobs(int id) {
+        return userRepo.findById(id).get().getJobsList();
     }
 }
