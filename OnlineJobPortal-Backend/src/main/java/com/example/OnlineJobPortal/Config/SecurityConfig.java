@@ -49,7 +49,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/jobs/{id}").hasRole("EMPLOYEER")
                         .requestMatchers(HttpMethod.DELETE, "/api/jobs/{id}").hasRole("EMPLOYEER")
 
+                        //employers api
                         .requestMatchers(HttpMethod.GET, "/api/employers").permitAll()
+
+
+                        //job seekers api
                         .requestMatchers(HttpMethod.GET, "/api/jobseekers").permitAll()
                         .requestMatchers(HttpMethod.GET, "/postedJobs/{id}").permitAll()
 

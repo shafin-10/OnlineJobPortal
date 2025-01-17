@@ -6,14 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class home {
-
-    /*@GetMapping("/")
-    public String greet(){
-        return "hello";
-    }
-
-    @PostMapping("/applyJob")
-    public String applyJob(){
-        return "applyJob";
-    }*/
+    
 }
