@@ -49,13 +49,27 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/jobs/{id}").hasRole("EMPLOYEER")
                         .requestMatchers(HttpMethod.DELETE, "/api/jobs/{id}").hasRole("EMPLOYEER")
 
+                        //users api
+                        .requestMatchers(HttpMethod.GET, "/api/users").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/users/{id}").permitAll()
+                        //.requestMatchers(HttpMethod.GET, "/api/users/{email}").permitAll() //fix
+                        .requestMatchers(HttpMethod.DELETE, "/api/users/{id}").permitAll() //fix
+                        .requestMatchers(HttpMethod.PUT, "/api/users/{id}").permitAll()
+
+
+
+
+
+
+
+
                         //employers api
                         .requestMatchers(HttpMethod.GET, "/api/employers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/postedJobs/{id}").permitAll() //posted jobs by employer
 
 
                         //job seekers api
                         .requestMatchers(HttpMethod.GET, "/api/jobseekers").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/postedJobs/{id}").permitAll()
 
 
                         .anyRequest().authenticated())
