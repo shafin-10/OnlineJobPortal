@@ -2,13 +2,17 @@ package com.example.OnlineJobPortal.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Table(name = "job_application")
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class JobApplication{
 
     @Id
@@ -26,6 +30,7 @@ public class JobApplication{
     @JoinColumn(name = "jobs_id")
     @JsonIgnore
     private Jobs jobs;
+
 
 
     public int getId() {
@@ -55,6 +60,8 @@ public class JobApplication{
     public void setUsers(Users users) {
         this.users = users;
     }
+
+
 
     public Jobs getJobs() {
         return jobs;

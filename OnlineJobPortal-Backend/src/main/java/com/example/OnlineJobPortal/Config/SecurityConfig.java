@@ -40,7 +40,7 @@ public class SecurityConfig {
                 //for login restriction
                 .authorizeHttpRequests(request -> request
                         //this two link will not require authentication
-                        .requestMatchers("/api/login","/api/register").permitAll()
+                        .requestMatchers("/api/login", "/api/register").permitAll()
 //                        .requestMatchers("/addJob").hasAnyRole("USER", "ADMIN", "EMPLOYEER")
 
                         //jobs api
@@ -65,7 +65,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/jobseekers").permitAll()
 
                         //job application api
-                        .requestMatchers(HttpMethod.POST,"/api/application/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/application/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/application/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/applicatants/{jobId}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/users/current").permitAll()
+
+
 
                         .anyRequest().authenticated())
                 //to enable login with rest client
@@ -77,7 +82,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         //dao authentication provider is the authentication provider for database
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 

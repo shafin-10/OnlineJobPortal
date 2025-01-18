@@ -2,6 +2,7 @@ package com.example.OnlineJobPortal.Controller;
 
 import com.example.OnlineJobPortal.model.Jobs;
 import com.example.OnlineJobPortal.model.Users;
+import com.example.OnlineJobPortal.service.AuthService;
 import com.example.OnlineJobPortal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    AuthService authService;
 
     @GetMapping("/users")
     public ResponseEntity<List<Users>> getAllUsers(){
@@ -59,7 +63,13 @@ public class UserController {
         else
             return new ResponseEntity<>("failed to update", HttpStatus.NOT_FOUND);
     }
-    //
 
-
+    @GetMapping("/users/current")
+    public ResponseEntity<Users> currentoggedinUser(){
+        Users users = authService.getCurrentLoggedInUser();
+        if(users != null)
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

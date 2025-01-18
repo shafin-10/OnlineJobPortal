@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -48,4 +50,28 @@ public class JobApplicationController {
             return new ResponseEntity<>("Something went wrong. Please try again later", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/application/{id}")
+    public ResponseEntity<String> deleteApplication(@PathVariable int id) {
+        JobApplication jobApplication = jobApplicationRepo.findById((long) id).get();
+        if (jobApplication != null) {
+            jobApplicationRepo.deleteById((long) id);
+            return new ResponseEntity<>("Job Application successfully deleted.", HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>("Job Application not found.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    @GetMapping("/applicatants/{jobId}")
+    public ResponseEntity<List<Users>>  getApplicantsByJobId(@PathVariable int jobId){
+        List<JobApplication> ja = jobApplicationRepo.findByJobsId(jobId);
+        List<Users> users = new ArrayList<>();
+        ja.forEach(jobApplication -> {
+            Users user = jobApplication.getUsers();
+            users.add(user);
+        });
+        return new ResponseEntity<>(users, HttpStatus.CREATED);
+    }
+
 }

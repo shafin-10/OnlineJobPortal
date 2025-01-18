@@ -13,4 +13,7 @@ import java.util.List;
 public interface JobApplicationRepo extends JpaRepository<JobApplication, Long> {
     @Query("SELECT ja FROM JobApplication ja WHERE ja.jobs = :jobs AND ja.users = :users")
     List<JobApplication> findByJobsAndUsers(Jobs jobs, Users users);
+
+    @Query("SELECT ja FROM JobApplication ja WHERE ja.jobs.id = :jobId")
+    List<JobApplication> findByJobsId(int jobId);
 }
