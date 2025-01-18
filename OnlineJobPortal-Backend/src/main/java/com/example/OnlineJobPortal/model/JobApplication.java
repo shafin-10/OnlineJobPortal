@@ -2,12 +2,14 @@ package com.example.OnlineJobPortal.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.Date;
 
 @Table(name = "job_application")
 @Entity
-public class JobApplication {
+@Builder
+public class JobApplication{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

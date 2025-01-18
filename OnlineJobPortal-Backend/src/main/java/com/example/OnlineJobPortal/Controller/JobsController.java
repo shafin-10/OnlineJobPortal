@@ -62,6 +62,13 @@ public class JobsController {
     }
 
     // add search job api
+    @GetMapping("/searchJobs")
+    public ResponseEntity<List<Jobs>> getAllJobs(@RequestParam(value = "search", required = false) String search) {
+        if (search != null && !search.isEmpty()) {
+            return new ResponseEntity<>(jobsService.getAllJobsByParams(search), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(jobsService.getAllJobs(), HttpStatus.OK);
+    }
 
 
 }

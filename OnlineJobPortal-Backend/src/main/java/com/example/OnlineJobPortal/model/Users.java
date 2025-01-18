@@ -16,6 +16,13 @@ public class Users {
     private String email;
     private String password;
 
+    private String skiils;
+    private String profession;
+    private int yearsOfExperience;
+
+    private String company;
+    private String companyLocation;
+    private String industry;
 
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
     @JsonManagedReference

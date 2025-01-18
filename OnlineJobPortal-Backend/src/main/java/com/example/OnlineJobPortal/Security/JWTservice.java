@@ -16,6 +16,7 @@ import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JWTservice {
@@ -39,11 +40,14 @@ public class JWTservice {
 
     //generate token for each login
     public String generateToken(String username) {
+        Users user = userRepo.findByEmail(username);
+
         Map<String, Object> claims = new HashMap<>();
         return Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(username)
+                .add("roles", user.getRolesList().stream().map(it -> it.getName()).collect(Collectors.joining()) )
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .and()

@@ -35,6 +35,7 @@ public class SecurityConfig {
         //first disable csrf
         return httpSecurity
                 .csrf(Customizer -> Customizer.disable())
+                .cors(Customizer.withDefaults())
 
                 //for login restriction
                 .authorizeHttpRequests(request -> request
@@ -45,6 +46,7 @@ public class SecurityConfig {
                         //jobs api
                         .requestMatchers(HttpMethod.POST, "/api/job").hasRole("EMPLOYEER")
                         .requestMatchers(HttpMethod.GET, "/api/jobs").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/searchJobs").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/jobs/{id}").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/jobs/{id}").hasRole("EMPLOYEER")
                         .requestMatchers(HttpMethod.DELETE, "/api/jobs/{id}").hasRole("EMPLOYEER")
@@ -52,25 +54,18 @@ public class SecurityConfig {
                         //users api
                         .requestMatchers(HttpMethod.GET, "/api/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/users/{id}").permitAll()
-                        //.requestMatchers(HttpMethod.GET, "/api/users/{email}").permitAll() //fix
-                        .requestMatchers(HttpMethod.DELETE, "/api/users/{id}").permitAll() //fix
+                        .requestMatchers(HttpMethod.DELETE, "/api/users/**").permitAll()//fix
                         .requestMatchers(HttpMethod.PUT, "/api/users/{id}").permitAll()
-
-
-
-
-
-
-
 
                         //employers api
                         .requestMatchers(HttpMethod.GET, "/api/employers").permitAll()
                         .requestMatchers(HttpMethod.GET, "/postedJobs/{id}").permitAll() //posted jobs by employer
 
-
                         //job seekers api
                         .requestMatchers(HttpMethod.GET, "/api/jobseekers").permitAll()
 
+                        //job application api
+                        .requestMatchers(HttpMethod.POST,"/api/application/{id}").permitAll()
 
                         .anyRequest().authenticated())
                 //to enable login with rest client

@@ -40,4 +40,8 @@ public class JobsService {
     public Jobs updateJob(int id, Jobs job) {
         return jobsRepo.save(job);
     }
+
+    public List<Jobs> getAllJobsByParams(String params) {
+        return jobsRepo.findAllByParams(params);
+    }
 }
